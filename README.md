@@ -78,7 +78,3 @@ Order Success
 
 
 ---
-
-## 📄 License
-
-MIT License - feel free to use and modify for learning and showcase projects!
