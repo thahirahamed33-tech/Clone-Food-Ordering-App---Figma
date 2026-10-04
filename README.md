@@ -2,7 +2,13 @@
 
 A pixel-perfect, interactive web application clone built from the Figma Community Food Ordering App prototype design ([Figma Prototype File](https://www.figma.com/community/file/1688472582874740748/food-ordering-app)).
 
-![Food Ordering App Preview](./Food%20Ordering%20App.png)
+---
+
+## 🎨 Figma Design Export
+
+![Figma Food Ordering App Prototype](./figma_prototype_design.png)
+
+---
 
 ## ✨ Features
 
@@ -68,6 +74,7 @@ npm run dev
 
 ```
 ├── public/
+│   ├── figma_design.png        # Design screenshot asset
 │   └── hero_food_plate.jpg     # Generated high-res hero asset
 ├── src/
 │   ├── components/
@@ -86,6 +93,7 @@ npm run dev
 │   ├── App.jsx                 # Prototype shell & state management
 │   ├── index.css               # Design system & CSS variables
 │   └── main.jsx                # Application entry point
+├── figma_prototype_design.png  # Clean-named Figma prototype design image
 ├── Food Ordering App.png       # Original Figma export reference
 └── package.json
 ```
