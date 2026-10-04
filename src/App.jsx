@@ -8,7 +8,7 @@ import OrderSuccessModal from './components/OrderSuccessModal';
 import OrderTrackingScreen from './components/OrderTrackingScreen';
 import ProfileScreen from './components/ProfileScreen';
 import Navbar from './components/Navbar';
-import { Smartphone, Monitor } from 'lucide-react';
+import { Smartphone, Monitor, Image, X } from 'lucide-react';
 
 export default function App() {
   const [screen, setScreen] = useState('welcome'); // 'welcome', 'home', 'cart', 'tracking', 'profile'
@@ -23,6 +23,7 @@ export default function App() {
   // Modal States
   const [selectedItem, setSelectedItem] = useState(null);
   const [successOrderAmount, setSuccessOrderAmount] = useState(null);
+  const [showFigmaModal, setShowFigmaModal] = useState(false);
 
   // Cart State (Initial sample cart item matching Figma)
   const [cartItems, setCartItems] = useState([
@@ -103,6 +104,15 @@ export default function App() {
         <div className="controls-group">
           <button 
             className="toggle-btn"
+            onClick={() => setShowFigmaModal(true)}
+            title="View Original Figma Design Screenshot"
+          >
+            <Image size={14} />
+            <span>Figma Design</span>
+          </button>
+
+          <button 
+            className="toggle-btn"
             onClick={() => setDeviceMode(prev => prev === 'mobile' ? 'responsive' : 'mobile')}
             title="Toggle Device Frame Mode"
           >
@@ -111,6 +121,81 @@ export default function App() {
           </button>
         </div>
       </div>
+
+      {/* Figma Screenshot Fullscreen Modal */}
+      {showFigmaModal && (
+        <div className="figma-modal-overlay" onClick={() => setShowFigmaModal(false)}>
+          <div className="figma-modal-container" onClick={(e) => e.stopPropagation()}>
+            <div className="figma-modal-header">
+              <h3>Original Figma Design Export</h3>
+              <button className="close-btn" onClick={() => setShowFigmaModal(false)}>
+                <X size={20} />
+              </button>
+            </div>
+            <div className="figma-image-scroll">
+              <img src="/figma_design.png" alt="Original Figma Design" />
+            </div>
+          </div>
+          <style>{`
+            .figma-modal-overlay {
+              position: fixed;
+              inset: 0;
+              background: rgba(10, 10, 20, 0.85);
+              backdrop-filter: blur(12px);
+              z-index: 999;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 20px;
+            }
+            .figma-modal-container {
+              width: 100%;
+              max-width: 1100px;
+              height: 88vh;
+              background: #1E293B;
+              border-radius: 24px;
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              display: flex;
+              flex-direction: column;
+              overflow: hidden;
+            }
+            .figma-modal-header {
+              padding: 16px 24px;
+              background: #0F172A;
+              color: #FFFFFF;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .figma-image-scroll {
+              flex: 1;
+              overflow: auto;
+              padding: 20px;
+              display: flex;
+              justify-content: center;
+            }
+            .figma-image-scroll img {
+              max-width: 100%;
+              height: auto;
+              border-radius: 12px;
+              box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+            .close-btn {
+              background: rgba(255,255,255,0.1);
+              border: none;
+              color: #fff;
+              width: 34px;
+              height: 34px;
+              border-radius: 50%;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          `}</style>
+        </div>
+      )}
 
       {/* Main Mobile Prototype Frame */}
       <div className={`mobile-device-container ${deviceMode === 'responsive' ? 'mode-responsive' : ''} ${screen === 'welcome' ? 'on-welcome' : ''}`}>
